@@ -26,7 +26,7 @@ describe Api::V1::UsersController do
 
       it "renders the json representation for the user record just created" do
         user_response = JSON.parse(response.body, symbolize_names: true)
-        expect(user_response[:email]).to eql @user_attributes[:email]
+        expect(user_response[:email]).to eq @user_attributes[:email]
       end
 
       it { should respond_with 201 }
