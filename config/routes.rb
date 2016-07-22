@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :users, :only => [:show, :create, :update, :destroy]
       resources :sessions, :only => [:create, :destroy]
       resources :schools, :only => [:show, :create]
+      resources :admins, :only => [:show]
     end
   end
 end
