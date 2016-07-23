@@ -1,8 +1,14 @@
 class Api::V1::SessionsController < ApplicationController
+    before_action :authenticate_with_token!, only: [:destroy]
 	def create
 		user_password = params[:session][:password]
     	user_email = params[:session][:email]
-    	user = user_email.present? && User.find_by(email: user_email)
+
+        if User.find_by(email: user_email)
+            user = User.find_by(email: user_email)
+        else
+            user = Admin.find_by(email: user_email)
+        end
 
     	if user && user.valid_password?(user_password)
     		sign_in user, store: false
@@ -14,10 +20,14 @@ class Api::V1::SessionsController < ApplicationController
     	end
     end
     def destroy
-    	user = User.find_by(auth_token: params[:id])
-    	user.generate_authentication_token!
-    	user.save
-    	head 204
+        if user_signed_in?
+            current_user.generate_authentication_token!
+            user.save
+        else
+            current_admin.generate_authentication_token!
+            current_admin.save
+        end
+        head 204
     end
 
     private
