@@ -2,6 +2,8 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  has_many :alerts
+
   before_create :generate_authentication_token!
 
   field :auth_token, type: String, default: ""
