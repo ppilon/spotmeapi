@@ -16,6 +16,16 @@ class Api::V1::AlertsController < ApplicationController
 			render json: { errors: alert.errors }, status: 422
 		end
 	end
+	def update
+
+		alert = Alert.find(params[:id])
+
+		if alert.update(alert_params)
+			render json: alert, status: 200, location: [:api, alert]
+		else
+			render json: { errors: alert.errors }, status: 422
+		end
+	end
 	private
 
     def alert_params
