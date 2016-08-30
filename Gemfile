@@ -20,14 +20,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'active_model_serializers'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'mongoid', '~> 5.0.0'
 
-# Use Unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'mongo'
 
 gem 'devise'
 
@@ -38,13 +33,19 @@ group :test do
   gem "shoulda-matchers"
 end
 
+group :development do
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
+  gem 'capistrano3-unicorn'
+end
+
+group :production do
+  gem 'unicorn'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
-  gem 'mongoid', '~> 5.0.0'
-
-  gem 'mongo'
 
   # # Access an IRB console on exception pages or by using <%= console %> in views
   # gem 'web-console', '~> 2.0'

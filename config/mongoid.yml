@@ -5,7 +5,7 @@ development:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: spot_me_development
+      database: spotmeapi_development
       # Provides the hosts the default client can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
@@ -16,11 +16,25 @@ development:
 test:
   clients:
     default:
-      database: spot_me_test
+      database: spotmeapi_test
       hosts:
         - localhost:27017
       options:
         read:
           mode: :primary
         max_pool_size: 1
-
+production:
+  # Configure available database clients. (required)
+  clients:
+    # Defines the default client. (required)
+    default:
+      # Defines the name of the default database that Mongoid can connect to.
+      # (required).
+      database: spot_me_production
+      # Provides the hosts the default client can connect to. Must be an array
+      # of host:port pairs. (required)
+      hosts:
+        - 192.168.1.51:27017
+      options:
+  options:
+    raise_not_found_error: false
